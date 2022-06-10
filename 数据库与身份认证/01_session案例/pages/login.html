@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<body>
+    <!-- 登录表单 -->
+    <!-- <form id="form1"> -->
+        <div>账号: <input type="text" name="username" autocomplete="off" id="username"></div>
+        <div>密码: <input type="password" name="password" id="password"></div>
+        <button>登录</button>
+    <!-- </form> -->
+
+
+    <!-- // 自己瞎写的 -->
+    <script>
+        $(function() {
+           $('button').on('click', function() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                $.ajax({
+                    // 请求方式
+                    type: 'POST',
+                    // 请求地址
+                    url: 'http://127.0.0.1/api/login',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    header: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    success: (data) => {
+                        console.log(data);
+                        if (data.status === 0) {
+                            window.location.href="./index.html";
+                        }
+                    },
+                    error: (data, xhr) => { 
+                        console.log(data);
+                    }
+                });
+           });
+        });
+    </script>
+</body>
+</html>

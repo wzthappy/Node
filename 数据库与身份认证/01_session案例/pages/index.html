@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台主页</title>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>首页</h1>
+    <button id="btnLogout">退出登录</button>
+    <script>
+        $(function () {
+            $.ajax({
+                // 请求方式
+                type: 'get',
+                // 请求地址
+                url: 'http://127.0.0.1/api/username',
+                success: (data) => {
+                    console.log(data);
+                    if (data.status) {
+                        alert('您尚未登录，请登录后再执行此操作！');
+                        window.location.href="./login.html";
+                    } else {
+                        alert('欢迎您的到来！' + data.username + '先生');
+                    }
+                },
+            });
+            $('#btnLogout').on('click', () => {
+                $.ajax({
+                    // 请求方式
+                    type: 'get',
+                    // 请求地址
+                    url: 'http://127.0.0.1/api/logout',
+                    success: (data) => {
+                        console.log(data);
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

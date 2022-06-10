@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.wrap {
+				width: 400PX;
+				margin: 100px auto;
+			}
+
+			table {
+				width: 400PX;
+				height: 150px;
+				border: 1px solid #ccc;
+			}
+
+			thead {
+				text-align: center;
+				background-color: #008FFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<table border="1" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							<input type="checkbox" id="j_cbAll">
+						</th>
+						<th>商品</th>
+						<th>价格</th>
+					</tr>
+				</thead>
+				<tbody id="j_tb">
+					<tr>
+						<td>
+							<input type="checkbox">
+						</td>
+						<td>iPhone8</td>
+						<td>8000</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox">
+						</td>
+						<td>iPad Pro</td>
+						<td>5000</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox">
+						</td>
+						<td>iPad Air</td>
+						<td>2000</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox">
+						</td>
+						<td>Apple Watch</td>
+						<td>2000</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script type="text/javascript">
+			// 1. 全选和取消全选
+			//  获取元素
+			var j_cbAll = document.getElementById('j_cbAll'); // 全选按钮
+			var j_tbs = document.getElementById('j_tb').getElementsByTagName('input'); // 下面所有的复选框
+			// 注册事件
+			j_cbAll.onclick = function() {
+				// this.checked 它可以得到当前复选框的选中状态 如果是true 就是选中，如果是false 就是未选中
+				console.log(this.checked);
+				for (var i = 0; i < j_tbs.length; i++) {
+					j_tbs[i].checked = this.checked;
+				}
+			}
+			// 2. 下面复选框影响上面的复选框
+			for (var i = 0; i < j_tbs.length; i++) {
+				j_tbs[i].onclick = function() {
+					// flag 控制全选按钮是否选中
+					var flag = true;
+					// 每次点击下面的复选框都要循环检查4个下按钮是否全选中
+					for (var i = 0; i < j_tbs.length; i++) {
+						if (!j_tbs[i].checked) {
+							flag = false;
+							break;
+						}
+					}
+					j_cbAll.checked = flag;
+				}
+			}
+		</script>
+	</body>
+</html>
